@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחק קלפים אינטראקטיבי - 36 שאלות</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Varela+Round&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Varela Round', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #b8d4e6 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header-section {
+            background: white;
+            padding: 30px 20px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .reichman-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 120px;
+            height: auto;
+        }
+        
+        .top-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .top-logo img {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c5f7c;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-size: 3em;
+            font-weight: 700;
+            font-family: 'Amatic SC', cursive;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .card {
+            aspect-ratio: 1;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f7fa 100%);
+            border: 3px solid #5a8ba8;
+        }
+
+        .card-front img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #7db9d8 0%, #5a8ba8 100%);
+            color: white;
+            transform: rotateY(180deg);
+            font-size: 15px;
+            overflow: auto;
+            text-align: center;
+            font-weight: 400;
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        .card-back p {
+            line-height: 1.4;
+        }
+
+        @media (max-width: 1200px) {
+            .cards-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            .card-back {
+                font-size: 13px;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            .top-logo img {
+                max-width: 90%;
+            }
+            .reichman-logo {
+                width: 80px;
+                top: 15px;
+                left: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <img src="https://i.ibb.co/zhZFWB2N/reichman.png" alt="אוניברסיטת רייכמן" class="reichman-logo">
+            <div class="top-logo">
+                <img src="https://i.ibb.co/VKNxKtm/logo.png" alt="מרכז מיטיב - אוניברסיטת רייכמן">
+            </div>
+        </div>
+        <h1>36 שאלות ליצירת חיבור ואינטימיות</h1>
+        <div class="cards-grid" id="cardsGrid"></div>
+    </div>
+
+    <script>
+        const cardsData = [
+            { image: 'https://i.ibb.co/p6YXyVfy/1.jpg', question: 'האם יש לכם תחושת בטן סודית בנוגע לדרך בה תמותו?' },
+            { image: 'https://i.ibb.co/n4dgfbk/2.jpg', question: 'איזה יום יהווה את "היום המושלם" עבורכם?' },
+            { image: 'https://i.ibb.co/t1Pjqx8/3.jpg', question: 'האם הייתם רוצים להיות מפורסמים? באיזה אופן?' },
+            { image: 'https://i.ibb.co/fLD5TWy/4.jpg', question: 'לפני שאתם מתקשרים למישהו, האם יוצא לכם להתאמן על מה שאתם הולכים להגיד? למה?' },
+            { image: 'https://i.ibb.co/xttjjXB8/5.jpg', question: 'מבין כל האנשים בעולם, את מי הייתם רוצים לארח לארוחת ערב?' },
+            { image: 'https://i.ibb.co/qYnsdWyJ/6.jpg', question: 'בעבור איזה דבר בחייכם אתם מוקירים הכי הרבה תודה?' },
+            { image: 'https://i.ibb.co/B2KnnPr0/7.jpg', question: 'אם היה באפשרותכם לחיות עד גיל 90 ולשמור על הגוף או התודעה שלכם כפי שהיו בגיל 30, למשך 60 השנים האחרונות בחייכם, באיזה מהם הייתם בוחרים?' },
+            { image: 'https://i.ibb.co/1tWbqS6R/8.jpg', question: 'מנו 3 דברים שיש לכם ולבן/בת הזוג שותפ/ה שלכם במשותף.' },
+            { image: 'https://i.ibb.co/dJx62Ly2/9.jpg', question: 'מתי שרתם לעצמכם בפעם האחרונה? ולמישהו אחר?' },
+            { image: 'https://i.ibb.co/Xf7pWjLW/10.jpg', question: 'מהו הזיכרון הכי נוראי שלכם?' },
+            { image: 'https://i.ibb.co/JLj57LM/11.jpg', question: 'אם היה באפשרותכם להתעורר מחר עם תכונה או יכולת נוספת, מה תבחרו לקבל?' },
+            { image: 'https://i.ibb.co/fVQ39t7r/12.jpg', question: 'האם יש משהו שחלמתם לעשות במשך זמן רב? למה עדיין לא עשיתם זאת?' },
+            { image: 'https://i.ibb.co/0R8P79hD/13.jpg', question: 'מהו הזיכרון הכי מתוק שלכם?' },
+            { image: 'https://i.ibb.co/q3xMnc7r/14.jpg', question: 'ספרו לבן / בת הזוג שלכם את סיפור חייכם ב-4 דקות ובפירוט הרב ביותר שתוכלו.' },
+            { image: 'https://i.ibb.co/kgsj563Y/15.jpg', question: 'מה זוכה להערכה הרבה ביותר מצדכם ביחסי חברות?' },
+            { image: 'https://i.ibb.co/1JX2yFzR/16.jpg', question: 'מהו ההישג הכי טוב בחייכם?' },
+            { image: 'https://i.ibb.co/cXTgDtGn/17.jpg', question: 'אם הייתם יכולים לגלות באמצעות כדור בדולח את האמת על עצמכם ועל החיים, את העתיד או כל דבר אחר, מה הייתם רוצים לדעת?' },
+            { image: 'https://i.ibb.co/Q7b9RTTg/18.jpg', question: 'אם היה באפשרותכם לשנות כל דבר שתרצו בנוגע לאופן בו חינכו אתכם, מה הייתם משנים?' },
+            { image: 'https://i.ibb.co/hFQxQPqD/19.jpg', question: 'אם הייתם יודעים שבעוד שנה בדיוק תמותו בפתאומיות, האם הייתם משנים משהו באורח החיים שלכם כיום? מדוע?' },
+            { image: 'https://i.ibb.co/3YT3VYzG/20.jpg', question: 'מה המשמעות של חברות עבורכם?' },
+            { image: 'https://i.ibb.co/pr9RpMMd/21.jpg', question: 'מה התפקיד שאהבה וחיבה משחקות בחייכם?' },
+            { image: 'https://i.ibb.co/S4HrPXZ8/22.jpg', question: 'זרקו במהירות תכונות של בן/בת הזוג / השותפ/ה שלכם, שאתם מחשיבים כחיוביות. שתפו חמש תכונות בסך הכל.' },
+            { image: 'https://i.ibb.co/7tK36vr0/23.jpg', question: 'באיזו מידה משפחתכם חמה וקרובה? האם אתם מרגישים שהילדות שלכם הייתה מאושרת יותר משל אנשים אחרים?' },
+            { image: 'https://i.ibb.co/3XxSXrh/24.jpg', question: 'כיצד אתם מרגישים בנוגע למערכת היחסים שלכם עם אמכם?' },
+            { image: 'https://i.ibb.co/m5PL8w3P/25.jpg', question: 'כל אחד בתורו יאמר שלוש הצהרות שמשותפות לכן/ם. לדוגמה: "שנינו נמצאים בחדר הזה ומרגישים ש..."' },
+            { image: 'https://i.ibb.co/8DrND53Y/26.jpg', question: 'השלימו את המשפט: "הלוואי שהיה לי מישהו שהייתי יכול/ה לשתף אותו ב..."' },
+            { image: 'https://i.ibb.co/0jX52h2W/27.jpg', question: 'שתפו עם בן/ בת הזוג שלכם מה היה חשוב שהוא / היא ידעו, אילו הייתם מעוניינים להיות חברים קרובים זה של זה.' },
+            { image: 'https://i.ibb.co/TBtBjd7P/28.jpg', question: 'ספרו לבן / בת הזוג שלכם מה אתם אוהבים בנוגע אליהם, תהיו כנים ביותר, אמרו דברים שככל הנראה לא הייתם אומרים לאדם שהרגע פגשתם.' },
+            { image: 'https://i.ibb.co/k6ybNJmR/29.jpg', question: 'שתפו בעיה אישית ובקשו את עצת בן / בת הזוג שלכם בנוגע לאופן בו הוא / היא היו מתמודדים איתה. בקשו מהם גם לשקף כיצד נראה שאתם מרגישים בנוגע לאותה בעיה.' },
+            { image: 'https://i.ibb.co/zWT9yHdt/30.jpg', question: 'ספרו לבן / בת הזוג שלכם על משהו שאתם כבר אוהבים בהם.' },
+            { image: 'https://i.ibb.co/fGKXdL9q/31.jpg', question: 'מתי בכיתן לאחרונה בפני אדם אחר? ולבדכם?' },
+            { image: 'https://i.ibb.co/rR8QDXrW/32.jpg', question: 'איזה נושא לדעתכם רציני מדי מכדי להתבדח עליו, אם קיים כזה?' },
+            { image: 'https://i.ibb.co/vx1C59Jm/33.jpg', question: 'אם הייתם מתים בערב בלי הזדמנות לתקשר עם אף אחד, על איזה דבר שלא אמרתם למישהו הייתם הכי מתחרטים? למה עדיין לא אמרתם להם את הדבר הזה?' },
+            { image: 'https://i.ibb.co/wZFHRtVn/34.jpg', question: 'הבית שלכם וכל תכולתו עולים באש. אחרי שהצלתם את כולם, יש לכם הזדמנות לחזור ולהציל עוד פריט אחד אחרון. מה הייתם לוקחים ולמה?' },
+            { image: 'https://i.ibb.co/8nqJNwpS/35.jpg', question: 'שתפו עם בן / בת הזוג שלכם רגע מביך שהתרחש בחייכם.' },
+            { image: 'https://i.ibb.co/21VfLymq/36.jpg', question: 'המוות של מי מבין כל בני המשפחה שלכם הכי יפריע לכם לדעתכם? מדוע?' }
+        ];
+
+        const cardsGrid = document.getElementById('cardsGrid');
+
+        cardsData.forEach((cardData, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            card.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="${cardData.image}" alt="קלף ${index + 1}">
+                    </div>
+                    <div class="card-back">
+                        <p>${cardData.question}</p>
+                    </div>
+                </div>
+            `;
+            
+            card.addEventListener('click', function() {
+                this.classList.toggle('flipped');
+            });
+            
+            cardsGrid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
